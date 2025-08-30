@@ -1,38 +1,98 @@
-.App {
-  text-align: center;
+:root{
+  color-scheme: light dark;
+  font-family: Noto Sans;
+}
+@font-face {
+    font-family: Noto Sans;
+    src: url(../fonts/NotoSans-Regular.ttf);
+  }
+@font-face {
+  font-family: Noto Sans Bold;
+  src: url(/fonts/NotoSans-Bold.ttf);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@media (prefers-color-scheme: light){
+  body{
+    background: linear-gradient(180deg, #EBF2FC 0%, #EEF8F9 100%);
+  }
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@media (prefers-color-scheme: dark){
+  #logo{
+    content: url("../public/assets/logo-for-dark.svg");
+    filter: brightness(2.5);
+  }
+  .header{
+    background-color: hsl(226, 25%, 17%);
+  }
+  body {
+    background: fixed linear-gradient(180deg, #040918 0%, #091540 100%);
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.header{
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
+  width: 80vw;
+  padding: 10px;
+  border-radius: 10px;
+}
+.header-wrap{
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
-
-.App-link {
-  color: #61dafb;
+#logo{
+  display: flex;
+  justify-content: flex-start;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.change-theme-wrap{
+  display: flex;
+  justify-content: center;
+  padding: 7px;
+  width: 10%;
+  border-radius: 7px;
+  background: hsl(225, 23%, 24%);
+}
+.list-title{
+  text-align: center;
+  font-family: Noto Sans Bold;
+}
+.sort-btns{
+  display: flex;
+  flex-direction: flex-row;
+  justify-content: center;
+  gap: 10px;
+}
+.sort-btns label{
+  padding: 10px 20px;
+  border-radius: 24px;
+  background-color: hsl(226, 25%, 17%);
+  border: solid 1px hsl(225, 23%, 24%);
+}
+.hidden {
+  position: absolute;
+  width: 100px;
+  height: 10%;
+  /*margin: 15px;*/
+  margin-top: -5px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(1 0 0 0);
+  opacity: 0.0;
+  white-space: nowrap;
+}
+input[type=radio]:checked + .sort-btn {
+  background-color: #c7231a;
+  color: #fbfdfe;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 20px;
+  line-height: 1.4;
+  font-weight: 500;
+  letter-spacing: -0.3px;
+  box-shadow: unset;
+  border: unset;
+}
+.sort-btn-wrap{
+  display: flex;
+  justify-content: center;
 }
