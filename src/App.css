@@ -101,13 +101,13 @@ input[type=radio]:checked + .sort-btn {
 main{
   margin-top: 16px;
   display: grid;
-  gap: 16px;
 }
 .card{
   background: hsl(226, 25%, 17%);
   border-radius: 16px;
   padding: 16px;
   border: solid 1px hsl(226, 11%, 37%);
+  margin-top: 8px;
 }
 .logo-title{
   display: flex;
