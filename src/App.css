@@ -63,6 +63,9 @@
   display: flex;
   justify-content: center;
 }
+main{
+  grid-template-columns: repeat(auto-fit, 390px);
+}
 }
 .list-title{
   text-align: center;
@@ -112,10 +115,14 @@ input[type=radio]:checked + .sort-btn {
   display: flex;
   justify-content: center;
 }
+@media screen and (max-width: 768px){
+  main{
+    grid-template-columns: repeat(auto-fit, 98vw);
+  }
+}
 main{
   margin-top: 16px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 400px);
   width: 100%;
   gap: 8px;
   justify-content: center;
