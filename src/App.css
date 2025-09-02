@@ -48,9 +48,21 @@
   display: flex;
   justify-content: center;
   padding: 7px;
-  width: 10%;
+  width: 30px;
   border-radius: 7px;
   background: hsl(225, 23%, 24%);
+}
+@media screen and (min-width: 768px){
+  .title-and-btn{
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  width: 87vw;
+}
+.title-and-btn-wrap{
+  display: flex;
+  justify-content: center;
+}
 }
 .list-title{
   text-align: center;
@@ -61,6 +73,8 @@
   flex-direction: flex-row;
   justify-content: center;
   gap: 10px;
+  height: 50px;
+  margin: auto 0;
 }
 .sort-btns label{
   padding: 10px 20px;
@@ -101,13 +115,17 @@ input[type=radio]:checked + .sort-btn {
 main{
   margin-top: 16px;
   display: grid;
+  grid-template-columns: repeat(auto-fit, 400px);
+  width: 100%;
+  gap: 8px;
+  justify-content: center;
+  /* border: 2px solid red; */
 }
 .card{
   background: hsl(226, 25%, 17%);
   border-radius: 16px;
   padding: 16px;
   border: solid 1px hsl(226, 11%, 37%);
-  margin-top: 8px;
 }
 .logo-title{
   display: flex;

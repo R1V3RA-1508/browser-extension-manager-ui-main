@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 import './App.css';
 import { useState, useEffect } from 'react';
 
-function RenderPage({children}){
+function RenderPage(){
   return ( 
     <>
     <div className="header-wrap">
@@ -13,28 +13,32 @@ function RenderPage({children}){
         </div>
       </header>
     </div>
-    <h1 className="list-title">
-      Extensions List
-    </h1>
+    <div className='title-and-btn-wrap'>
+      <div className='title-and-btn'>
+        <h1 className="list-title">
+        Extensions List
+      </h1>
 
-    <div className="sort-btns">
-      <div className="sort-btn-wrap">
-        <input type="radio" name="filter" data-filter="all" defaultChecked className="hidden" />
-          <label htmlFor="filter-all" class="sort-btn">All</label>
-      </div>
-      
-      <div className="sort-btn-wrap">
-        <input type="radio" data-filter="active" className="hidden" name="filter" />
-        <label htmlFor="active" className="sort-btn">Active</label>
-      </div>
-      <div className="sort-btn-wrap">
-        <input type="radio" className="hidden" data-filter="inactive" name="filter" />
-          <label htmlFor="inactive" className="sort-btn">Inactive</label>
+      <div className="sort-btns">
+        <div className="sort-btn-wrap">
+          <input type="radio" name="filter" data-filter="all" defaultChecked className="hidden" />
+            <label htmlFor="filter-all" class="sort-btn">All</label>
+        </div>
+        
+        <div className="sort-btn-wrap">
+          <input type="radio" data-filter="active" className="hidden" name="filter" />
+          <label htmlFor="active" className="sort-btn">Active</label>
+        </div>
+        <div className="sort-btn-wrap">
+          <input type="radio" className="hidden" data-filter="inactive" name="filter" />
+            <label htmlFor="inactive" className="sort-btn">Inactive</label>
+        </div>
       </div>
     </div>
+    </div>
 
-    <main>
-      {/* <div className="card">
+    {/* <main>
+       <div className="card">
         <div className="logo-title">
           <div className="logo"><img src="assets/logo-devlens.svg" alt="" /></div>
           <div class="title-desc">
@@ -49,9 +53,8 @@ function RenderPage({children}){
             <span class="slider"></span>
           </label>
         </div>
-      </div> */}
-      {children}
-    </main>
+      </div>
+    </main> */}
     
     </>
   );
@@ -59,7 +62,6 @@ function RenderPage({children}){
 
 const App = () => {
   const [cards, setCards] = useState([]);
-  const [isEnabled, setIsEnabled] = useState(true);
 
   useEffect(() => {
     fetch("./data.json")
@@ -76,25 +78,26 @@ const App = () => {
 
   return (
     <>
-    <RenderPage />
-    {cards.map((card, index) => (
-      <div className="card" key={card.id || index}>
-      <div className="logo-title">
-        <div className="logo"><img src={card.logo} alt="" /></div>
-        <div className="title-desc">
-          <h1>{card.name}</h1>
-          <p>{card.description}</p>
-        </div>
-      </div>
-      <div className="remove-off-on">
-        <button>Remove</button>
-        <label className="switch">
-          <input type="checkbox" checked={card.isActive} />
-          <span className="slider"></span>
-        </label>
-      </div>
-    </div>
-    ))}
+      <RenderPage />
+      <main>
+        {cards.map((card, index) => (
+        <div className="card" key={card.id || index}>
+          <div className="logo-title">
+            <div className="logo"><img src={card.logo} alt="" /></div>
+            <div className="title-desc">
+              <h1>{card.name}</h1>
+              <p>{card.description}</p>
+            </div>
+          </div>
+          <div className="remove-off-on">
+            <button>Remove</button>
+            <label className="switch">
+              <input type="checkbox" checked={card.isActive} />
+              <span className="slider"></span>
+            </label>
+          </div>
+        </div> ))}
+      </main> 
     </>
   );
 }
