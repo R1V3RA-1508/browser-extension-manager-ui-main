@@ -1,6 +1,46 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 
+function sortCards(state){
+        const cards = document.querySelectorAll('.card');
+        
+        cards.forEach(card => {
+          if (state === 'all' || card.classList.contains(state)){
+            card.style.display = 'block';
+          }
+          else{
+            card.style.display = 'none';
+          }
+        })
+      }
+
+      function toggleState(checkbox, card){
+        if (checkbox.checked) {
+          card.classList.remove('inactive');
+          card.classList.add('active');
+        }
+        else{
+          card.classList.remove('inactive');
+          card.classList.add('active');
+
+
+        const activeFilter = document.querySelector('input[name="filter"]:checked');
+        if (activeFilter){
+          const filterState = activeFilter.id.replace('filter-', '');
+          if (filterState !== 'all' && !card.classList.contains(filterState)){
+            card.style.display = 'none';
+          }
+        }
+        }
+      }
+
+  function removeCard(id, cards){
+    console.log(cards);
+    console.log(id);
+    cards.splice(id, cards[id]);
+    console.log(`Deleted ${id}`)
+}
+
 function RenderPage(){
   return ( 
     <>
@@ -20,17 +60,17 @@ function RenderPage(){
 
       <div className="sort-btns">
         <div className="sort-btn-wrap">
-          <input type="radio" name="filter" data-filter="all" defaultChecked className="hidden" />
+          <input type="radio" name="filter" id='filter-all' defaultChecked className="hidden" onClick={() => sortCards('all')} />
             <label htmlFor="filter-all" class="sort-btn">All</label>
         </div>
         
         <div className="sort-btn-wrap">
-          <input type="radio" data-filter="active" className="hidden" name="filter" />
-          <label htmlFor="active" className="sort-btn">Active</label>
+          <input type="radio" className="hidden" id='filter-active' name="filter" onClick={() => sortCards('active')} />
+          <label htmlFor="filter-active" className="sort-btn">Active</label>
         </div>
         <div className="sort-btn-wrap">
-          <input type="radio" className="hidden" data-filter="inactive" name="filter" />
-            <label htmlFor="inactive" className="sort-btn">Inactive</label>
+          <input type="radio" className="hidden" id='filter-inactive' name="filter" onClick={() => sortCards('inactive')} />
+            <label htmlFor="filter-inactive" className="sort-btn">Inactive</label>
         </div>
       </div>
     </div>
@@ -54,14 +94,14 @@ function RenderPage(){
         </div>
       </div>
     </main> */}
-    
     </>
   );
 }
 
+        
 const App = () => {
   const [cards, setCards] = useState([]);
-
+  
   useEffect(() => {
     fetch("./data.json")
       .then(response => response.json())
@@ -73,14 +113,30 @@ const App = () => {
       });
   }, []);
 
-  
+      
 
+      // <script>
+      //   function sort(state){
+      //     card = document.querySelectorAll('card');
+
+      //     if (card.classList.contains(state)){
+      //       card.classList.remove('invis')
+      //     }
+      //     else{
+      //       card.classList.add('invis');
+      //     }
+
+      //   }
+      // </script>
+
+      
+      
   return (
     <>
       <RenderPage />
       <main>
         {cards.map((card, index) => (
-        <div className="card" key={card.id || index}>
+        <div className={`card ${card.state}`} data-filter={card.state} key={card.id || index}>
           <div className="logo-title">
             <div className="logo"><img src={card.logo} alt="" /></div>
             <div className="title-desc">
@@ -89,9 +145,9 @@ const App = () => {
             </div>
           </div>
           <div className="remove-off-on">
-            <button>Remove</button>
+            <button onClick={removeCard(index, cards)}>Remove</button>
             <label className="switch">
-              <input type="checkbox" checked={card.isActive} />
+              <input type="checkbox" defaultChecked={card.isActive} onChange={(e) => toggleState(e.target, e.target.closest('.card'))} />
               <span className="slider"></span>
             </label>
           </div>
