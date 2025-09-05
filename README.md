@@ -36,7 +36,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Repo URL](https://github.com/r1v3ra-1508/browser-extension-manager-ui-main/)
+- Solution URL: [Solution URL](https://www.frontendmentor.io/challenges/browser-extension-manager-ui-yNZnOfsMAp)
 - Live Site URL: [Live Site](https://browser-extension-manager-ui-main-eight.vercel.app/)
 
 ## My process
