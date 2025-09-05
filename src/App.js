@@ -14,32 +14,7 @@ function sortCards(state){
         })
       }
 
-      function toggleState(checkbox, card){
-        if (checkbox.checked) {
-          card.classList.remove('inactive');
-          card.classList.add('active');
-        }
-        else{
-          card.classList.remove('inactive');
-          card.classList.add('active');
 
-
-        const activeFilter = document.querySelector('input[name="filter"]:checked');
-        if (activeFilter){
-          const filterState = activeFilter.id.replace('filter-', '');
-          if (filterState !== 'all' && !card.classList.contains(filterState)){
-            card.style.display = 'none';
-          }
-        }
-        }
-      }
-
-  function removeCard(id, cards){
-    console.log(cards);
-    console.log(id);
-    cards.splice(id, cards[id]);
-    console.log(`Deleted ${id}`)
-}
 
 function RenderPage(){
   return ( 
@@ -113,7 +88,20 @@ const App = () => {
       });
   }, []);
 
+  
+    const toggleState = (index) => {
+      const updatedCards = [...cards];
+      updatedCards[index].isActive = !updatedCards[index].isActive;
+      updatedCards[index].state = updatedCards[index].state === 'inactive' ? 'active' : 'inactive';
+      console.log(index, ': ', updatedCards[index].isActive, updatedCards[index].state);
+      setCards(updatedCards);
+    }
       
+    const removeCard = (index) => {
+      const updatedCards = cards.filter((_, i) => i !== index);
+      setCards(updatedCards);
+    };
+
 
       // <script>
       //   function sort(state){
@@ -145,9 +133,9 @@ const App = () => {
             </div>
           </div>
           <div className="remove-off-on">
-            <button onClick={removeCard(index, cards)}>Remove</button>
+            <button onClick={() => removeCard(index)}>Remove</button>
             <label className="switch">
-              <input type="checkbox" defaultChecked={card.isActive} onChange={(e) => toggleState(e.target, e.target.closest('.card'))} />
+              <input type="checkbox" defaultChecked={card.isActive} onChange={() => toggleState(index)} />
               <span className="slider"></span>
             </label>
           </div>
