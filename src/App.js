@@ -15,6 +15,28 @@ function sortCards(state){
       }
 
 
+const lightmode = () => {
+  document.addEventListener('DOMContentLoaded', () => {
+    let lightmode = localStorage.getItem('lightmode');
+    const themeSwitch = document.getElementById('change-theme-wrap');
+
+    const enableLightmode = () => {
+      document.body.classList.add('light');
+      localStorage.setItem('lightmode', 'active');
+    }
+
+    const disableLightmode = () => {
+      document.body.classList.remove('light');
+      localStorage.setItem('lightmode', null);
+    }
+
+    themeSwitch.addEventListener("click", () => {
+      lightmode = localStorage.getItem('lightmode')
+      lightmode !== 'active' ? enableLightmode() : disableLightmode();
+    })
+  })
+}
+lightmode()
 
 function RenderPage(){
   return ( 
@@ -22,8 +44,9 @@ function RenderPage(){
     <div className="header-wrap">
       <header className="header">
         <img src="/assets/logo.svg" alt="" id="logo" />
-        <div className="change-theme-wrap">
+        <div className="change-theme-wrap" id='change-theme-wrap'>
           <img src="assets/icon-sun.svg" alt="" id="icon-sun" />
+          <img src="assets/icon-moon.svg" id="icon-moon" />
         </div>
       </header>
     </div>

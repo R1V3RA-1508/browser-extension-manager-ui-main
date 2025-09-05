@@ -2,9 +2,12 @@
   color-scheme: light dark;
   font-family: Noto Sans;
 
-  --color225: 0;
-  --color226: 0;
-  --color226-11: 0;
+    --color225: hsl(225, 23%, 24%);
+    --color226: hsl(226, 25%, 17%);
+    --color226-11: hsl(226, 11%, 37%);
+    --p-color: hsl(0, 0%, 78%);
+    --color: white;
+    --white: white;
 }
 @font-face {
     font-family: Noto Sans;
@@ -15,40 +18,56 @@
   src: url(/fonts/NotoSans-Bold.ttf);
 }
 
-@media (prefers-color-scheme: light){
-  :root{
-    --color225: hsl(0, 0%, 78%);
-    --color226: hsl(226, 25%, 17%);
-    --color226-11: hsl(0, 0%, 93%);
-    --white: hsl(200, 60%, 99%);
-    --color: black;
-  }
-  body{
-    background-color: linear-gradient(180deg, #EBF2FC 0%, #EEF8F9 100%);
-    background-attachment: fixed;
-  }
-  .header{
-    background: var(--white);
-  }
-  #logo{
-    --content: url('../public/assets/logo.svg');
-  }
+.light{
+  background: linear-gradient(180deg, #EBF2FC 0%, #EEF8F9 100%);
+  background-attachment: fixed;
 }
-@media (prefers-color-scheme: dark){
-  :root{
-    --color225: hsl(225, 23%, 24%);
-    --color226: hsl(226, 25%, 17%);
-    --color226-11: hsl(226, 11%, 37%);
-    --color: white;
+.light #logo{
+    content: url('../public/assets/logo.svg');
+    filter: brightness(1);
   }
-  #logo{
-    content: url("../public/assets/logo-for-dark.svg");
-    filter: brightness(2.5);
+.light header{
+    background: var(--color226);
+    filter: drop-shadow(0px 2px 4px var(--shadow));
   }
-  body {
-    background: linear-gradient(180deg, #040918 0%, #091540 100%);
-    background-attachment: fixed;
-  }
+.light{
+  --p-color: var(--color);
+  --color226-11: var(--color225);
+  --color225: hsl(0, 0%, 78%);
+  --color226: hsl(0, 0%, 93%);
+  --shadow: hsl(0, 0%, 78%);
+  --color: black;
+}
+#icon-sun{
+  display: block;
+}
+.light #icon-sun{
+  display: none;
+}  
+#icon-moon{
+  display: none;
+}
+.light #icon-moon{
+  display: block;
+}
+.light .card{
+  filter: drop-shadow(0px 2px 4px var(--shadow));
+}
+.light .sort-btns{
+  filter: drop-shadow(0px 2px 4px var(--shadow));
+}
+.attribution { font-size: 11px; text-align: center; }
+.attribution {color: var(--color)}
+.attribution a { color: hsl(228, 45%, 44%); }
+.light .attribution a { color: hsl(228, 45%, 44%); }
+
+#logo{
+  content: url("../public/assets/logo-for-dark.svg");
+  filter: brightness(2.5);
+}
+body {
+  background: linear-gradient(180deg, #040918 0%, #091540 100%);
+  background-attachment: fixed;
 }
 
 .header{
@@ -74,6 +93,7 @@
   width: 30px;
   border-radius: 7px;
   background: var(--color225);
+  cursor: pointer;
 }
 @media screen and (min-width: 768px){
   .title-and-btn{
@@ -93,6 +113,7 @@ main{
 .list-title{
   text-align: center;
   font-family: Noto Sans Bold;
+  color: var(--color);
 }
 .sort-btns{
   display: flex;
@@ -112,6 +133,10 @@ main{
   font-weight: 500;
   color: var(--color);
 }
+.sort-btn-wrap:hover{
+  filter: brightness(1.2);
+  transition: 0.5s;
+}
 .hidden {
   position: absolute;
   width: 100px;
@@ -127,7 +152,7 @@ main{
 }
 input[type=radio]:checked + .sort-btn {
   background-color: #c7231a;
-  color: var(--color);
+  color: white;
   font-family: "Noto Sans", sans-serif;
   font-size: 20px;
   line-height: 1.4;
@@ -154,6 +179,7 @@ main{
 }
 .card{
   background: var(--color226);
+  color: var(--color);
   border-radius: 16px;
   padding: 16px;
   border: solid 1px var(--color226-11);
@@ -172,7 +198,7 @@ main{
 }
 .title-desc p {
   margin: 0;
-  color: hsl(0, 0%, 78%);
+  color: var(--p-color);
 }
 .remove-off-on button{
   background: var(--color226);
@@ -234,6 +260,11 @@ input:checked + .slider:before {
 }
 .remove-off-on button{
   cursor: pointer;
+}
+.remove-off-on button:hover{
+  background-color: hsl(3, 71%, 56%);
+  transition: 0.5s;
+  color: var(--color);
 }
 .invis{
   display: none;
